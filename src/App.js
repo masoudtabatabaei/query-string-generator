@@ -1,23 +1,25 @@
-import { useEffect } from 'react';
-import './App.css';
+import { useEffect, useReducer } from 'react';
 import { Button } from './components/Button';
 import { Input } from './components/Input';
 import { Pagination } from './components/Pagination';
 import { useQueryGenerator } from './hooks/useQueryGenerator';
+import { InitialState, reducer } from './components/urlGenerator';
+import './App.css';
 
-function App() {
-  const page = useQueryGenerator("page","2");
-  // const query = useQueryGenerator("query","masoud");
+const App = () => {
+  const [state, dispatch] = useReducer(reducer,InitialState);
   
   useEffect(() => {
-    // console.log("Query: ", query.get("query"));
-    // console.log("Page: ", page.get("page"));
-  },[]);
+    console.log("Run again...");
+  },[state.page]);
 
   return (
       <div className='app'>
-        <Input />
-        <Pagination />
+        <div>{state.page}</div>
+        <Input/>
+        <Pagination handleClick = {(pageNo) => {
+          dispatch({type: "UPDATE_PAGE" , data:{pageNo}})
+        }}/>
         <Button />
       </div>
   );

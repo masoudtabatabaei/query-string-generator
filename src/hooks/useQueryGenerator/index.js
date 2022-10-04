@@ -1,25 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export const useQueryGenerator = (key,value) => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    let updatedSearchParams = new URLSearchParams(window.location.search);
-
+    const [searchParams, setSearchParams] = useSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(window.location.search);
+    
     useEffect(() => {
-        console.log("search: ", searchParams.toString());
-        // let obj = {};
-        // obj[key] = value;
-        // searchParams.set(key,value);
-        // setSearchParams([...searchParams.entries(), [key, value]]);
-        if(!updatedSearchParams.get(key)) {
-            console.log(`key: ${key}, value: ${value}`);
-            searchParams.set(key,value);
-            setSearchParams(searchParams);
-        } else {
-            updatedSearchParams.append(key,value);
-            setSearchParams(updatedSearchParams);
-        }
-    },[key]);
+        searchParams.set(key, value);
+
+        setSearchParams(searchParams);
+        console.log("query: ", searchParams.toString());
+    },[searchParams]);
+
+    const qs = useMemo(() => {
+
+    });
+    
+    // useEffect(() => {
+    //     setTimeout(()=>{
+    //         searchParams.set('name', 'mahya');
+    //         setSearchParams(searchParams);
+    //     },3000);
+    // },[]);
     
     return searchParams;
 }
