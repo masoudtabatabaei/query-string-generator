@@ -1,6 +1,6 @@
 export const InitialState = {
     query: "",
-    passQuery: false,
+    passQuery: new Date().getTime(),
     page: 1,
     size: 10
 };
@@ -16,6 +16,8 @@ export const reducer = (state, action) => {
             return {...state , query: action.data.query};
             case "UPDATE_PAGE":
                 return {...state , page: action.data.pageNo};
+            case "UPDATE_PAGE_SIZE":
+                return {...state , size: action.data.pageSize};
             case "PASS_QUERY":
             console.log("Query Passed ===");
             return {...state , passQuery: action.data.passQuery};

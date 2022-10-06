@@ -1,7 +1,7 @@
 import { SelectPageSize } from "./components/SelectPageSize";
 import "./styles.css";
 
-export const Pagination = ({handleClick}) => {
+export const Pagination = ({handleClick, handleToggleSize}) => {
     // const handleChangePage = (pageNo) => {
     //     console.log("page is: ", pageNo);
     // }
@@ -17,7 +17,7 @@ export const Pagination = ({handleClick}) => {
     
     return <>
         <div className="pagination_container">
-            <SelectPageSize/>
+            <SelectPageSize handleToggleSize={handleToggleSize}/>
             {renderBtns()}
         </div>
     </>
